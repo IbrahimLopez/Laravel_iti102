@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ 'bower_components/bootstrap/dist/css/bootstrap.min.css'|public }}">
+    <link rel="stylesheet" href="{{ 'bower_components/bootstrap/dist/css/bootstrap-theme.css'|public }}">
+    <link rel="stylesheet" href="{{ 'css/diseno.css'|public }}?{{'now'|date('U')}}">
+    
+
+    <title>{{ title }}</title>
+</head>
+<body>
+<div class="content">
+    <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ 'home'|url }}">Home</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{ 'home/about'|url }}">Abouts</a></li>
+                <li><a href="{{ 'home/products'|url }}">Productos</a></li>
+                <li><a href="{{ 'home/contact'|url }}">Contact</a></li>
+                <li><a href="{{ 'usuarios/'|url }}">Usuarios</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+    <div class="container">
+        {% block conten %}
+        {% endblock %}
+    </div>
+
+</div>
+    <script src="{{ 'bower_components/jquery/dist/jquery.min.js'|public }}"></script>
+    <script src="{{ 'bower_components/bootstrap/dist/js/bootstrap.js'|public }}"></script>
+    <script src="{{ 'js/ini.js'|public }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{'bower_components/node_modules/jquery-form/dist/jquery.form.min.js'|public}}"></script>
+    <script>
+        function base_url(url){
+            url = url || '';
+            return '{{ ''|url}}'+url;
+        }
+        function redirect(url){
+            url = url || '';
+            window.location.href = base_url(url);            
+        }
+    </script>
+    {% block script %}{% endblock %}
+</body>
+</html>

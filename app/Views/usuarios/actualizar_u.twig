@@ -1,0 +1,61 @@
+{% extends 'partials/layout.twig' %}
+{% block conten %}
+    <div class="page-header">
+        <h4>Ficha de registro de Usuarios</h4>
+    </div>
+    <form action="{{'usuarios/actualizar_u'|url}}" method="post" >
+    <input hidden value="{{model.id}}" name="id">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="" >Nombre</label>
+                    <input value="{{model.nombre}}" name="nombre" type="text" class="form-control" placeholder="Ingrese Nombre">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="" >Apellido Paterno</label>
+                    <input value="{{model.apaterno}}" name="apaterno" type="text" class="form-control" placeholder="Ingrese Apellido Paterno">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="" >Apellido Materno</label>
+                    <input value="{{model.amaterno}}" name="amaterno" type="text" class="form-control" placeholder="Ingrese Apellido Materno">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="" >Correo Electronico</label>
+                    <input value="{{model.correo}}" name="correo" type="email" class="form-control" placeholder="Ingrese Correo Electronico">
+                </div>
+            </div>            
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="" >Rol</label>
+                    <select name="rol_id" id="" class="form-control">
+                        <option value="" selected disabled> Elegir rol...</option>
+                        {% for rol in roles %}
+                            <option {% if rol.id==model.rol_id %}
+                                        selected
+                                        {% endif %}
+                            value="{{ rol.id  }} "> {{  rol.nombre }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-right">
+                <a href="{{ 'usuarios/'|url }}" class="btn btn-default"> Cancelar</a>
+                <button data-ajax="true" type="submit" class="btn btn-primary">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+

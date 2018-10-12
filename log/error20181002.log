@@ -1,0 +1,1 @@
+[2018-10-02 09:11:16] App\Repositories\UsuarioRepositories.ERROR: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'password' cannot be null (SQL: insert into `usuarios` (`nombre`, `apaterno`, `amaterno`, `rol_id`, `correo`, `password`, `updated_at`, `created_at`) values (Luis, Rubio, rubio, 3 , rubio@rubio.com, , 2018-10-02 09:11:16, 2018-10-02 09:11:16)) [] []

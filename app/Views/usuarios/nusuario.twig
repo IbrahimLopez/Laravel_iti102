@@ -1,0 +1,69 @@
+{% extends 'partials/layout.twig' %}
+{% block conten %}
+    <div class="page-header">
+        <h4>Ficha de registro de Usuarios</h4>
+    </div>
+    <form action="{{'usuarios/guardarusuario'|url}}" method="post" >
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="" >Nombre</label>
+                    <input name="nombre" type="text" class="form-control" placeholder="Ingrese Nombre">
+                    <label class="form-validation-failed" data-key="nombre"> </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="" >Apellido Paterno</label>
+                    <input name="apaterno" type="text" class="form-control" placeholder="Ingrese Apellido Paterno">
+                    <label class="form-validation-failed" data-key="apaterno"> </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="" >Apellido Materno</label>
+                    <input name="amaterno" type="text" class="form-control" placeholder="Ingrese Apellido Materno">
+                    <label class="form-validation-failed" data-key="amaterno"> </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="" >Correo Electronico</label>
+                    <input name="correo" type="email" class="form-control" placeholder="Ingrese Correo Electronico">
+                    <label class="form-validation-failed" data-key="correo"> </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="" >Password</label>
+                    <input autocomplete="off" name="password" type="password" class="form-control" placeholder="Ingrese Password">
+                    <label class="form-validation-failed" data-key="password"> </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="" >Rol</label>
+                    <select name="rol_id" id="" class="form-control">
+                        <option value="" selected disabled> Elegir rol...</option>
+                        {% for rol in roles %}
+                            <option value="{{ rol.id  }} "> {{  rol.nombre }} </option>
+                        {% endfor %}
+                    </select>
+                    <label class="form-validation-failed" data-key="rol_id"> </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-right">
+                <a href="{{ 'usuarios/'|url }}" class="btn btn-default"> Cancelar</a>
+                <button data-ajax="true" type="submit" class="btn btn-primary">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
