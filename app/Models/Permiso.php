@@ -10,9 +10,12 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Permiso extends Model
 {
+    use SoftDeletes; //Libreria de eliminado 'suave'
     protected $table = 'permisos';
 
     public function negado(){

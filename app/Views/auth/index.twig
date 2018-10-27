@@ -1,0 +1,33 @@
+{% extends 'partials/layout_basic.twig' %}
+{% block conten %}
+    <div class="header">
+        <a href="">
+            <!--<img src="{{'img/logo.svg'|public}}" alt="{{company_name}}"> -->
+            {{company_name|upper}}
+        </a>
+    </div>
+    <div class="body">
+        <div class="fake_body"></div>
+        <div class="form-sub-container">
+            <form class="form-signin" action="{{'auth/signin'|url}}" method="post">
+                <h2 class="form-signin-heading">Iniciar Sesion</h2>
+                <label class="sr-only" for="">Correo</label>
+                <input class="form-control" type="email" name="correo" id="correo" placeholder="Correo" autofocus required>
+                <label class="sr-only" for="">Contraseña</label>
+                <input class="form-control" type="password" name="password" id="password" placeholder="Contraseña" autofocus required>
+               <button data-ajax="true" type="submit" class="btn btn-lg btn-primary btn-block">Iniciar Sesion</button>
+               <br>
+               <a href="#">Recuperar Contraseña</a>
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="#" target="_blank">
+                    ¿Necesitas ayuda?
+                </a>
+            </div> 
+        </div>
+    </div>
+{% endblock %}

@@ -14,6 +14,7 @@ use Core\Controller;
 use App\Models\Permiso;
 use App\Helpers\UrlHelper;
 use Core\ServicesContainer;
+use App\Helpers\ResponseHelper;
 use App\Validations\PermisoValidation;
 use App\Repositories\PermisoRepositories;
 
@@ -82,9 +83,12 @@ class PermisosController extends Controller
         Fecha: Wednesday, October, 2018
         Hora: 21:00:43
         */
-        public function getdelete()
+        public function getdelete($id)
         {
-           return $this->render('permisos/delete.twig');
+            if($id <= 0)
+                UrlHelper::redirect('permisos');
+                
+            return $this->render('permisos/delete.twig', ['title'=> 'Eliminar','model'=> (new PermisoRepositories())->obtener($id)]);
         }
         #endregion  
 
@@ -107,7 +111,7 @@ class PermisosController extends Controller
            $permisoRepo = new PermisoRepositories();
            $rh = $permisoRepo->guardar($model);
            if ($rh->response)
-                $rh->href = 'permisos/';
+                $rh->href = 'permisos';
             print_r(json_encode($rh));
         }
 
@@ -121,12 +125,31 @@ class PermisosController extends Controller
         {
             PermisoValidation::validate($_POST);
             $model = (new PermisoRepositories)->obtener($_POST['id']);
-            if(isset($_POST[nombre])) $model->nombre = $_POST['nombre'];
+            if(isset($_POST['nombre'])) $model->nombre = $_POST['nombre'];
             $rh = (new PermisoRepositories)->guardar($model);
             if ($rh->response) {
-                $rh->href = '/permisos';
+                $rh->href = 'permisos';
             }
             print_r(json_encode($rh));
+        }
+
+        /*
+        Autor: Ibrahim Alexis Lopez Roman,
+        Descripcion: Funcion para eliminar un permiso
+        Fecha: Thursday, October, 2018
+        Hora: 18:21:57
+        */
+        public function postdelete()
+        {
+            $model = (new PermisoRepositories())->obtener($_POST['id']);
+            $model->delete();
+            $rh = new ResponseHelper();
+            $rh->setResponse(true, 'El Registro se ha eliminado');
+            if ($rh->response)
+                $rh->href='permisos';        
+            //UrlHelper::redirect('usuarios');
+            print_r(json_encode($rh));
+            
         }
         #endregion         
     #ENDREGION

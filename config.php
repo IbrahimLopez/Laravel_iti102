@@ -10,8 +10,8 @@ return [
         'collation'  =>'utf8_unicode_ci',
         'prefix'  => ''
     ],
-    'session_time' => 10,
-    'session_name' => 'application-auth',
+    'session-time' => 10,
+    'session-name' => 'application-auth',
     'secret-key' => '@1br4ch0l_0.bcspn',
     'environment' => 'dev', // dev, prod, stop
     'timezone'  => 'America/Hermosillo',

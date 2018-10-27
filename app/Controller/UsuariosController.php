@@ -79,7 +79,7 @@ class UsuariosController extends Controller
         $usuarioRepo = new UsuarioRepositories();
         $rh = $usuarioRepo->guardar($model);
         if ($rh->response)
-            $rh->href = 'usuarios/';
+            $rh->href = 'usuarios';
         // UrlHelper::redirect('usuarios');
         print_r(json_encode($rh));
     }
@@ -114,7 +114,7 @@ class UsuariosController extends Controller
         $model->password = null;
         $rh = $objRepo->guardar($model);
         if ($rh->response) {
-            $rh->href='/usuarios';
+            $rh->href='usuarios';
         }
         //UrlHelper::redirect('usuarios');
         print_r(json_encode($rh));
@@ -147,12 +147,13 @@ class UsuariosController extends Controller
     {
         $objRepo = new UsuarioRepositories();
         $model = $objRepo->obtener($_POST['id']);
-        $model->activo = false;
-        $rh = $objRepo->guardar($model);
+        $model->delete();
+        $rh = new ResponseHelper();
+        $rh->setResponse(true, 'El Registro se ha eliminado');
         if ($rh->response)
             $rh->href='usuarios';        
-        UrlHelper::redirect('usuarios');
-        // print_r(json_encode($rh));
+        //UrlHelper::redirect('usuarios');
+        print_r(json_encode($rh));
     }
     #endregion
     

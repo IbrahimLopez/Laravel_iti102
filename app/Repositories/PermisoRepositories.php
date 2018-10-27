@@ -2,19 +2,23 @@
 namespace App\Repositories;
 
 
-use App\Helpers\ResponseHelper;
-use App\Models\Permiso;
 use Core\Log;
+use App\Models\Permiso;
+use App\Models\PermisoNegado;
+use App\Helpers\ResponseHelper;
 use Illuminate\Database\Eloquent\Collection;
 
 class PermisoRepositories
 {
 
     private $permiso;
+    private $permisoNegado;
     public function __construct()
     {
         #Se instancia un nuevo permiso          
-        $this->permiso= new Permiso();        
+        $this->permiso= new Permiso();   
+        #Se instancia un nuevo permiso negado     
+        $this->permisoNegado= new PermisoNegado();   
     }
 
 
@@ -41,11 +45,9 @@ class PermisoRepositories
              $this->permiso=$model;
              if (isset($model->id))
                  $this->permiso->exists = true;
-            //  if (isset($this->permiso->password))
-            //      $this->permiso->password = sha1($this->model->password);
 
              $this->permiso->save();
-             $rh->setResponse(true, 'Registro guardado con exito');
+             $rh->setResponse(true, 'Operacion realizada con exito');
          } catch (\Exception $e)
          {             
            Log::error(PermisoRepositories::class, $e->getMessage());
@@ -66,5 +68,22 @@ class PermisoRepositories
         }
         return $dato;
     }
+
+
+    #region: Permisos negados
+        public function  obtenerPermisoNegadoByRol($permisoId, $rolId):?PermisoNegado
+        {
+            $pNegado = null;
+            try
+            {
+                $pNegado = $this->permisoNegado->where('permiso_id', $permisoId)->where('rol_id', $rolId)->first();
+            }
+            catch(\Exception $e)
+            {
+                Log::error(PermisoRepositories::class, $e->getMessage(). "Linea: " . $e->getLine());
+            }
+            return pNegado;
+        }
+    #endregion
     
 }

@@ -1,11 +1,11 @@
 <?php
 /*
 Autor: Ibrahim Alexis Lopez Roman,
-Fecha: Wednesday, October, 2018
-Hora: 22:48:26
+Fecha: Thursday, October, 2018
+Hora: 19:27:30
 Materia: Desarrollo de aplicaciones,
 Maestro: Noe Cazarez,
-Descripcion: Clase para validad a los permisos
+Descripcion: Clase de validacion de roles
 */
  
 namespace App\Validations;
@@ -13,7 +13,7 @@ namespace App\Validations;
 use Respect\Validation\Validator as v;
 use App\Helpers\ResponseHelper;
 
-class PermisoValidation 
+class RolValidation
 {
     public static function validate(array $model)
     {

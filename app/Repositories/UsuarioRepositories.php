@@ -9,9 +9,11 @@
 namespace App\Repositories;
 
 
-use App\Helpers\ResponseHelper;
-use App\Models\Usuario;
 use Core\Log;
+use Core\Auth;
+use App\Models\Usuario;
+use App\Helpers\ResponseHelper;
+use App\Repositories\UsuarioRepositories;
 use Illuminate\Database\Eloquent\Collection;
 
 /*  Developed by: Ibrahim Alexis Lopez Roman
@@ -35,7 +37,7 @@ class UsuarioRepositories
         $datos = [];
         try
         {
-            $datos = $this->usuario->get()->where('activo', true);
+            $datos = $this->usuario->get();
         }
         catch (\Exception $e)
         {
@@ -103,6 +105,38 @@ class UsuarioRepositories
         return $rh;
     }
 
+    /*
+    Autor: Ibrahim Alexis Lopez Roman,
+    Descripcion: Funcion para autentificar a un usuario
+    Fecha: Wednesday, October, 2018
+    Hora: 08:08:57
+    */
+    public function autentificar(string $correo, string $password):ResponseHelper
+    {
+        $rh = new ResponseHelper();
+        try
+        {
+            $datos = $this->usuario->where('correo', strtolower($correo))->where('password', sha1($password)->first());
+            if (is_object($datos)) {
+                Auth::signIn([
+                    'id'=> $datos->id,
+                    'nombre'=> $datos->nombre,
+                    'rol_id'=> $datos->rol_id
+                ]);
+                $rh->setResponse(true);
+            }
+            else
+            {
+                $rh->setResponse(false, 'Usuario o Contraseña incorrectos');
+                Log::critical(UsuarioRepositories::class, 'Intento Fallido de autentificacion para '.$correo);
+            }
+        }
+        catch(\Exception $e)
+        {
+            Log::error(UsuarioRepositories::class, $e->getMessage(). "Linea: " . $e->getLine());
+        }
+        return $rh;
+    }
     
 
 
