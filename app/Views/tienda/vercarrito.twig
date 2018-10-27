@@ -1,0 +1,24 @@
+{% extends 'partials/layout.twig' %}
+{% block conten %}
+    <div styles="padding-top: 30px;" class="row">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem id incidunt itaque modi natus soluta voluptas. Ab consectetur dolorem enim illum, laborum magnam, maxime molestiae neque non quis sed.</p>
+
+        <ul>
+            {% for item in carr %}
+                <li>
+                    {{ item[0].attributes['codigo']}} - {{ item[0].hash }} - {{ item[0].quantity }}
+                </li>
+
+            {% endfor %}
+        </ul>
+
+
+
+
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+
+    </script>
+{% endblock %}

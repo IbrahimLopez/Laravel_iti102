@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\View;
+//use Illuminate\Support\Facades\View;
 
 $router->group(['before' => 'auth'],function($router){
     $router->controller('usuarios', 'App\\Controller\\UsuariosController');
@@ -11,6 +11,7 @@ $router->controller('home', 'App\\Controller\\HomeController');
 $router->controller('permisos', 'App\\Controller\\PermisosController');
 $router->controller('roles', 'App\\Controller\\RolesController');
 $router->controller('auth', 'App\\Controller\\AuthController');
+$router->controller('tienda', 'App\\Controller\\TiendaController');
 #endregion
 $router->get('/', function () {
     //REDIRECCIONAR A LA CARPETA PUBLICA
