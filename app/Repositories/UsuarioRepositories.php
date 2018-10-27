@@ -116,7 +116,7 @@ class UsuarioRepositories
         $rh = new ResponseHelper();
         try
         {
-            $datos = $this->usuario->where('correo', strtolower($correo))->where('password', sha1($password)->first());
+            $datos = $this->usuario->where('correo', strtolower($correo))->where('password', sha1($password))->first();
             if (is_object($datos)) {
                 Auth::signIn([
                     'id'=> $datos->id,

@@ -1,0 +1,56 @@
+{% extends 'partials/layout.twig' %}
+{% block conten %}
+    <div class="row">
+        <a class="btn btn-success" href="{{ 'tienda/vercarrito'|url }}">Carrito</a>
+    </div>
+    <div class="row">
+        {% for item in datos %}
+            <div class="col-md-3">
+                <div class="panel panel">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            {{ item.id }}
+                        </li>
+                        <li class="list-group-item">
+                            {{ item.nombre }}
+                        </li>
+                        <li class="list-group-item">
+                            $ 100
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="btn btn-primary AddCar" data-target="{{ item.id }}">
+                                Agregar al carrito
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        {%  endfor %}
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        $('body').on('click', '.AddCar', function(){
+            var codigo = $(this).data('target');
+            $.ajax({
+                url: '{{ 'tienda/addcar'|url }}',
+                type: 'post',
+                dataType: 'JSON',
+                data: {id: codigo},
+                preventDefault: function(){
+                    console.log('Something')
+                },
+                success: function(res){
+                    if(res.response){
+                        // alert('Se agregago');
+                        console.log(res.result);
+                        //FUNCION PARA ACTUALIZAR EL CARRITO.
+                    }
+                },
+                error: function(req, status, err){
+                    console.log(err);
+                }
+            })
+        });
+    </script>
+{% endblock %}
